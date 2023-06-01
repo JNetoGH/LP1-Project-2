@@ -4,7 +4,6 @@ namespace TragicTheReckoning
 {
     public class Player
     {
-        
         public string Name { get; private set; }
         public int ManaPoints { get; private set; }
         public int HealthPoints { get; private set; }
@@ -20,8 +19,8 @@ namespace TragicTheReckoning
         
         public void Buy()
         {
-            throw new NotImplementedException();
+            Deck.Hand.Add(Deck.Pool[0]);
+            Deck.Pool.RemoveAt(0);
         }
-        
     }
 }
