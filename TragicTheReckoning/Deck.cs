@@ -12,11 +12,5 @@ namespace TragicTheReckoning
         {
             Pool.Sort();
         }
-
-        public void DrawCard()
-        {
-            Hand.Add(Pool[0]);
-            Pool.RemoveAt(0);
-        }
     }
 }
