@@ -18,20 +18,20 @@ namespace TragicTheReckoning
 
         public Deck()
         {
-            cardPool = Shuffle(cardPool);
+            this.Shuffle();
         }
         
-        private List<Card> Shuffle(List<Card> target)
+        private void Shuffle()
         {
             List<Card> shuffledDeck = new List<Card>();
             Random rnd = new Random();
-            for(int i = target.Count - 1; i>=0; i--)
+            for(int i = cardPool.Count - 1; i>=0; i--)
             {
                 int randomInt = rnd.Next(0,i);
-                shuffledDeck.Add(target[randomInt]);
-                target.RemoveAt(randomInt);
+                shuffledDeck.Add(cardPool[randomInt]);
+                cardPool.RemoveAt(randomInt);
             }
-            return shuffledDeck;
+            cardPool = shuffledDeck;
         }
         
     }
