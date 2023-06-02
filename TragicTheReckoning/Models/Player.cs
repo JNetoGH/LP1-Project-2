@@ -19,8 +19,8 @@ namespace TragicTheReckoning
         
         public void Buy()
         {
-            Deck.Hand.Add(Deck.Pool[0]);
-            Deck.Pool.RemoveAt(0);
+            Deck.Hand.Add(Deck.shuffledDeck[0]);
+            Deck.shuffledDeck.RemoveAt(0);
         }
     }
 }
