@@ -18,10 +18,6 @@ namespace TragicTheReckoning
             AttackPoints = attackPoints;
             DefencePoints = defencePoints;
         }
-
-        public int CompareTo(Card other)
-        {
-            return rnd.Next(0, 2);
-        }
+        
     }
 }
