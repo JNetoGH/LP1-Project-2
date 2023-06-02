@@ -3,9 +3,7 @@
 namespace TragicTheReckoning
 {
     public class Card
-    {
-        private Random rnd = new Random();
-        
+    {   
         public string Name { get; private set; }
         public int Cost { get; private set; }
         public int AttackPoints { get; private set; }
@@ -17,6 +15,11 @@ namespace TragicTheReckoning
             Cost = cost;
             AttackPoints = attackPoints;
             DefencePoints = defencePoints;
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
         
     }
