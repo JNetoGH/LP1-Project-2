@@ -18,7 +18,7 @@ namespace TragicTheReckoning.Controllers.Phases
 
         public void RunPhase(Player player1, Player player2)
         {
-            Console.WriteLine("Running Battle phase (not implemented yet)");
+            Console.WriteLine("Running Battle phase (not done yet)");
             _battleView.RenderBattleView(player1, player2);
         }
     }

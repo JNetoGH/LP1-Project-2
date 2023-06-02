@@ -21,18 +21,16 @@ namespace TragicTheReckoning.Controllers
         
         public void Run()
         {
-            InitGame();
-            RunGameLoop();
+            InitGame(_player1, _player2);
             
-        }
-        
-        private void RunGameLoop()
-        {
+            // Game Loop
             do
             {
                 _spellPhase.RunPhase(_player1, _player2);
                 _battlePhase.RunPhase(_player1, _player2);
             } while (TryGetWinner() is null);
+            
+            // greeting msg
         }
         
         private void InitGame(params Player[] players)

@@ -19,8 +19,10 @@ namespace TragicTheReckoning.Controllers.Phases
         
         public void RunPhase(Player player1, Player player2)
         {
-            Console.WriteLine("\nRunning spell phase (not implemented yet)");
-            _spellView.RenderSpellView(player1, player2);
+            Console.WriteLine("\nRunning spell phase (not done yet)");
+            _spellView.RenderPlayerHand(player1);
+            _spellView.RenderPlayerHand(player2);
+            
         }
     }
 }
