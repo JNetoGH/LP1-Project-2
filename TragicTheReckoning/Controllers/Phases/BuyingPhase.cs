@@ -10,9 +10,9 @@ namespace TragicTheReckoning.Controllers.Phases
    
         public BuyingPhase() => _buyingView = new BuyingView();
 
-        public void RunPhase(params Player[] players)
+        public void RunPhase(int roundNumber, params Player[] players)
         {
-            _buyingView.RenderPhaseLabel(this.GetType());
+            _buyingView.RenderPhaseLabel(roundNumber,this.GetType());
             foreach (Player player in players)
             {
                 if (!CanBuyACard(player))

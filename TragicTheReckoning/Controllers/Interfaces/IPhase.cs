@@ -4,6 +4,6 @@ namespace TragicTheReckoning.Controllers.Interfaces
 {
     public interface IPhase
     {
-        void RunPhase(params Player[] players);
+        void RunPhase(int roundNumber, params Player[] players);
     }
 }

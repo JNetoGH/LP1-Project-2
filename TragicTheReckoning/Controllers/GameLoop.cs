@@ -33,9 +33,9 @@ namespace TragicTheReckoning.Controllers
             {
                 _player1.ManaPoints = counter;
                 _player2.ManaPoints = counter;
-                _buyingPhase.RunPhase(_player1, _player2);
-                _spellPhase.RunPhase(_player1, _player2);
-                _battlePhase.RunPhase(_player1, _player2);
+                _buyingPhase.RunPhase(counter, _player1, _player2);
+                _spellPhase.RunPhase(counter, _player1, _player2);
+                _battlePhase.RunPhase(counter, _player1, _player2);
                 counter++;
                 winner = TryGetWinner();
                 

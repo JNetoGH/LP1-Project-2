@@ -10,22 +10,22 @@ namespace TragicTheReckoning.Controllers.Phases
         private readonly SpellView _spellView;
         public SpellPhase() => _spellView = new SpellView();
 
-        public void RunPhase(params Player[] players)
+        public void RunPhase(int roundNumber, params Player[] players)
         {
             foreach (Player player in players)
             {
                 _spellView.RenderPlayerRoundIntroduction(player);
-                RunTransferringLoop(player);
+                RunTransferringLoop(roundNumber, player);
             }
             _spellView.ClearScreen();
             _spellView.RenderPhaseExit(this.GetType());
         }
 
-        private void RunTransferringLoop(Player player)
+        private void RunTransferringLoop(int roundNumber, Player player)
         {
             while (true) // transferring loop
             {
-                _spellView.RenderPhaseLabel(this.GetType());
+                _spellView.RenderPhaseLabel(roundNumber, this.GetType());
                 _spellView.RenderPlayerStats(player);
                 _spellView.RenderPlayerHand(player);
                 _spellView.RenderPlayerCardsInArena(player);
@@ -53,6 +53,10 @@ namespace TragicTheReckoning.Controllers.Phases
                     {
                         _spellView.RenderInvalidInputMsg();
                     }
+                }
+                else
+                {
+                    _spellView.RenderInvalidInputMsg();
                 }
                 _spellView.RenderExitWithInput();
             }

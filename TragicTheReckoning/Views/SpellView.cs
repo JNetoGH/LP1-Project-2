@@ -72,6 +72,5 @@ namespace TragicTheReckoning.Views
             if (transferred) Console.WriteLine("Card moved to arena");
             else RenderInvalidInputMsg("Sorry, you don't have enough mana do do it.");
         }
-        
     }
 }

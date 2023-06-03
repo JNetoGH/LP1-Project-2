@@ -18,10 +18,9 @@ namespace TragicTheReckoning.Controllers.Phases
             _player2 = player2;
         }
         
-        public void RunPhase(params Player[] players)
+        public void RunPhase(int roundNumber, params Player[] players)
         {
-            _battleView.RenderPhaseLabel(this.GetType());
-            
+            _battleView.RenderPhaseLabel(roundNumber, this.GetType());
             Console.WriteLine("Running Battle phase (not done yet)");
             _battleView.RenderBattleView(players);
             

@@ -5,12 +5,12 @@ namespace TragicTheReckoning.Views
     public class View
     {
 
-        public void RenderPhaseLabel(Type phase, ConsoleColor nameColor = ConsoleColor.Cyan)
+        public void RenderPhaseLabel(int round, Type phase, ConsoleColor nameColor = ConsoleColor.Cyan)
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.Write("\nCurrent Phase: ");
+            Console.Write($"\nRound ({round}) | Current Phase: ");
             Console.ForegroundColor = nameColor;
             Console.WriteLine($"{phase.Name}");
             Console.BackgroundColor = 0;
@@ -19,7 +19,8 @@ namespace TragicTheReckoning.Views
 
         public void RenderPhaseExit(Type phase)
         {
-            RenderExitWithInput($"{phase.Name} has finished! ", ConsoleColor.Yellow, ConsoleColor.DarkGray);
+            RenderExitWithInput($"{phase.Name} has finished! ",
+                ConsoleColor.Yellow, ConsoleColor.DarkGray);
         }
         
         public void RenderExitWithInput(string msg = "", 
