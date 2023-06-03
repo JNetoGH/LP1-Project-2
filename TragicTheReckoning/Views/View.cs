@@ -5,18 +5,27 @@ namespace TragicTheReckoning.Views
     public class View
     {
 
-        public void RenderPhaseLabel(Type phase)
+        public void  RenderPhaseLabel(Type phase, ConsoleColor nameColor = ConsoleColor.Cyan)
         {
             Console.Clear();
-            Console.WriteLine($"\nCurrent Phase: {phase.Name}");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.Write("\nCurrent Phase: ");
+            Console.ForegroundColor = nameColor;
+            Console.WriteLine($"{phase.Name}");
+            Console.BackgroundColor = 0;
+            Console.ForegroundColor = ConsoleColor.White;
         }
     
         public void RenderPhaseExit(Type phase)
         {
-            Console.WriteLine($"\n{phase.Name} has finished!\nPRESS ANY KEY TO CONTINUE");
-            Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            RenderExitWithInput($"{phase.Name} has finished!");
+            Console.BackgroundColor = 0;
+            Console.ForegroundColor = ConsoleColor.White;
         }
-
+        
         protected void RenderExitWithInput(string msg)
         {
             Console.WriteLine($"\n{msg}\nPRESS ANY KEY TO CONTINUE");
@@ -37,18 +46,25 @@ namespace TragicTheReckoning.Views
                     untreatedInput = untreatedInput.ToUpper().Trim();
                 else
                 {
-                    Console.WriteLine("Sorry the input is not valid. Let's try again.");
+                    RenderInvalidInputMsg();
                     continue;
                 }
                 
                 // Checking if the input is valid or not
                 isInputValid = (untreatedInput.Equals("Y") || untreatedInput.Equals("N"));
                 if (!isInputValid)
-                    Console.WriteLine("Sorry the input is not valid. Let's try again.");
+                    RenderInvalidInputMsg();
                 else
                     treatedInput = untreatedInput;
             }
             return treatedInput.Equals("Y");
+        }
+
+        private void RenderInvalidInputMsg()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Sorry the input is not valid. Let's try again.");
+            Console.ForegroundColor = ConsoleColor.White;
         }
     }
 }
