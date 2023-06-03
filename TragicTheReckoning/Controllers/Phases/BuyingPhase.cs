@@ -1,5 +1,4 @@
-﻿using System;
-using TragicTheReckoning.Controllers.Interfaces;
+﻿using TragicTheReckoning.Controllers.Interfaces;
 using TragicTheReckoning.Views;
 
 namespace TragicTheReckoning.Controllers.Phases
@@ -12,20 +11,24 @@ namespace TragicTheReckoning.Controllers.Phases
 
         public void RunPhase(Player player1, Player player2)
         {
-            Console.WriteLine("Running buying phase");
-            
-            if (!CanBuyACard(player1))
-                _buyingView.RenderNotAllowedToBuyText(player1);
-            else if (_buyingView.RenderBuyingTexts(player1))
-                    player1.Buy();
-            
-            if (!CanBuyACard(player2))
-                _buyingView.RenderNotAllowedToBuyText(player2);
-            else if (_buyingView.RenderBuyingTexts(player2))
-                    player2.Buy();
+            _buyingView.RenderPhaseLabel(this.GetType());
+            Player[] players = new[] { player1, player2 };
+            foreach (Player player in players)
+            {
+                if (!CanBuyACard(player))
+                {
+                    _buyingView.RenderNotAllowedToBuyText(player);
+                    continue;
+                }
+                bool hasBoughtACard = _buyingView.RenderBuyingOption(player);
+                if (hasBoughtACard)
+                    player.BuyNewCard();
+                _buyingView.RenderHasBoughtANewCard(player, hasBoughtACard);
+            }
+            _buyingView.RenderPhaseExit(this.GetType());
         }
 
-        private bool CanBuyACard(Player player) => player.Hand.Count < GameLoop.MaxCardsInHand;
+        private bool CanBuyACard(Player player) => player.Hand.Count < Player.MaxCardsInHand;
         
     }
 }

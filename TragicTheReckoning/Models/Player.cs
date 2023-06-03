@@ -5,6 +5,10 @@ namespace TragicTheReckoning
 {
     public class Player
     {
+        
+        public const int ManaLimit = 5;
+        public const int MaxCardsInHand = 6;
+        
         public string Name { get; private set; }
         public int HealthPoints { get; private set; }
         public int ManaPoints { get; set; }
@@ -23,15 +27,18 @@ namespace TragicTheReckoning
             
             // GIVE THE PLAYER THE 6 INITIAL CARDS, THE DECK IS ALREADY SHUFFLED
             for (int i = 0; i < 5; i++)
-                Buy();
+                BuyNewCard();
             
         }
         
-        public void Buy()
+        public void BuyNewCard()
         {
             Card c = Deck.cardPool[Deck.cardPool.Count - 1];
             Hand.Add(c);
             Deck.cardPool.Remove(c);
         }
+
+        public override string ToString() => $"{Name} (HP: {HealthPoints}) (MP: {ManaPoints})";
+        
     }
 }

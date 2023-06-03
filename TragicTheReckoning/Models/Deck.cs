@@ -8,7 +8,7 @@ namespace TragicTheReckoning
 
         public List<Card> cardPool { get; set; } = new List<Card>()
         {
-            new Card("Bugs", 2,3,4),
+            new Card("fireball", 2,3,4),
             new Card("ijdeijdei", 2, 5, 7),
             new Card("iejiejd", 4, 5, 8),
             new Card("dkoekoe", 2, 3, 4),
@@ -33,6 +33,6 @@ namespace TragicTheReckoning
             }
             cardPool = shuffledDeck;
         }
-        
+
     }
 }

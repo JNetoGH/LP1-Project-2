@@ -6,9 +6,6 @@ namespace TragicTheReckoning.Controllers
 {
     public class GameLoop
     {
-        public const int ManaLimit = 5;
-        public const int MaxCardsInHand = 6;
-        
         private readonly Player _player1;
         private readonly Player _player2;
         
@@ -22,7 +19,7 @@ namespace TragicTheReckoning.Controllers
             _player2 = player2;
 
             _buyingPhase = new BuyingPhase();
-            _spellPhase = new SpellPhase(player1, player2);
+            _spellPhase = new SpellPhase();
             _battlePhase = new BattlePhase(player1, player2);
         }
         
@@ -34,12 +31,15 @@ namespace TragicTheReckoning.Controllers
             int counter = 1;
             do
             {
-                _player1.ManaPoints = counter >= ManaLimit ? ManaLimit : counter;
-                _player2.ManaPoints = counter >= ManaLimit ? ManaLimit : counter;
+                _player1.ManaPoints = counter >= Player.ManaLimit ? Player.ManaLimit : counter;
+                _player2.ManaPoints = counter >= Player.ManaLimit ? Player.ManaLimit : counter;
+                
                 _buyingPhase.RunPhase(_player1, _player2);
                 _spellPhase.RunPhase(_player1, _player2);
                 _battlePhase.RunPhase(_player1, _player2);
+                
                 counter++;
+                
             } while (TryGetWinner() is null);
             
             // greeting msg
