@@ -17,7 +17,6 @@ namespace TragicTheReckoning.Controllers
         {
             _player1 = player1;
             _player2 = player2;
-
             _buyingPhase = new BuyingPhase();
             _spellPhase = new SpellPhase();
             _battlePhase = new BattlePhase(player1, player2);
@@ -25,26 +24,27 @@ namespace TragicTheReckoning.Controllers
         
         public void Run()
         {
+
+            Player winner = null;
             InitGame(_player1, _player2);
-           
+            
             // Game Loop
             int counter = 1;
             do
             {
-                _player1.ManaPoints = counter >= Player.ManaLimit ? Player.ManaLimit : counter;
-                _player2.ManaPoints = counter >= Player.ManaLimit ? Player.ManaLimit : counter;
-                
+                _player1.ManaPoints = counter;
+                _player2.ManaPoints = counter;
                 _buyingPhase.RunPhase(_player1, _player2);
                 _spellPhase.RunPhase(_player1, _player2);
                 _battlePhase.RunPhase(_player1, _player2);
-                
                 counter++;
+                winner = TryGetWinner();
                 
-            } while (TryGetWinner() is null);
+            } while (winner == null);
             
             // greeting msg
         }
-        
+
         private void InitGame(params Player[] players)
         {
             foreach (Player player in players)
@@ -53,12 +53,12 @@ namespace TragicTheReckoning.Controllers
             }
         }
 
+        // RETORNA O VENCEDOR, ENQUANTO NAO HOUVER RERTONA NULL
         private Player TryGetWinner()
         {
-            if (_player2.HealthPoints <= 0)
-                return _player1;
-            if (_player1.HealthPoints <= 0)
-                return _player2;
+            _player1.HealthPoints = -133;
+            if (_player2.HealthPoints <= 0) return _player1;
+            if (_player1.HealthPoints <= 0) return _player2;
             return null;
         }
         

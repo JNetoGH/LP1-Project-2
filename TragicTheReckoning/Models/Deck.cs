@@ -8,19 +8,30 @@ namespace TragicTheReckoning
 
         public List<Card> cardPool { get; set; } = new List<Card>()
         {
-            new Card("fireball", 2,3,4),
-            new Card("ijdeijdei", 2, 5, 7),
-            new Card("iejiejd", 4, 5, 8),
-            new Card("dkoekoe", 2, 3, 4),
-            new Card("cnnbnmbs", 3, 1, 6),
-            new Card("qwqryr", 7, 3, 1),
+            new Card("Flying Wand", 1, 1, 1),
+            new Card("Flying Wand", 1, 1, 1),
+            new Card("Flying Wand", 1, 1, 1),
+            new Card("Flying Wand", 1, 1, 1),
+            new Card("Severed Monkey Head", 1, 2, 1),
+            new Card("Severed Monkey Head", 1, 2, 1),
+            new Card("Severed Monkey Head", 1, 2, 1),
+            new Card("Severed Monkey Head", 1, 2, 1),
+            new Card("Mystical Rock Wall", 2, 0, 5),
+            new Card("Mystical Rock Wall", 2, 0, 5),
+            new Card("Lobster McCrabs", 2, 1, 3),
+            new Card("Lobster McCrabs", 2, 1, 3),
+            new Card("Goblin Troll", 3, 2, 2),
+            new Card("Goblin Troll", 3, 2, 2),
+            new Card("Scorching Heatwave", 4, 5, 3),
+            new Card("Blind Minotaur", 3, 1, 3),
+            new Card("Tim, The Wizard", 5, 6, 4),
+            new Card("Sharply Dressed", 4, 3, 3),
+            new Card("Blue Steel", 2, 2, 2),
+            new Card("Blue Steel", 2, 2, 2)
         };
         
-        public Deck()
-        {
-            this.Shuffle();
-        }
-        
+        public Deck() => this.Shuffle();
+
         private void Shuffle()
         {
             List<Card> shuffledDeck = new List<Card>();

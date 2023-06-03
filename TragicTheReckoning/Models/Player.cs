@@ -1,19 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace TragicTheReckoning
 {
     public class Player
     {
+        
         public const int ManaLimit = 5;
         public const int MaxCardsInHand = 6;
         
-        public string Name { get; private set; }
-        public int HealthPoints { get; private set; }
-        public int ManaPoints { get; set; }
-        
         private Deck Deck { get; set; }
         public List<Card> Hand { get; private set; }
+        
+        public string Name { get; private set; }
+        public int HealthPoints { get; set; }
+        private int _manaPoints;
+        public int ManaPoints
+        {
+            get => _manaPoints;
+            set => _manaPoints = value >= Player.ManaLimit ? Player.ManaLimit : value;
+        }
         
         public Player(string name, int manaPoints, int healthPoints)
         {
@@ -27,7 +32,6 @@ namespace TragicTheReckoning
             // GIVE THE PLAYER THE 6 INITIAL CARDS, THE DECK IS ALREADY SHUFFLED
             for (int i = 0; i < MaxCardsInHand; i++)
                 BuyNewCard();
-            
         }
         
         public void BuyNewCard()
@@ -38,5 +42,6 @@ namespace TragicTheReckoning
         }
 
         public override string ToString() => $"{Name} (HP: {HealthPoints}) (MP: {ManaPoints})";
+        
     }
 }
