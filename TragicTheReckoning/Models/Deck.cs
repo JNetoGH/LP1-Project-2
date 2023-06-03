@@ -15,7 +15,7 @@ namespace TragicTheReckoning
             new Card("cnnbnmbs", 3, 1, 6),
             new Card("qwqryr", 7, 3, 1),
         };
-
+        
         public Deck()
         {
             this.Shuffle();
