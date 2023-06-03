@@ -15,6 +15,8 @@ namespace TragicTheReckoning.Controllers.Phases
         public void RunPhase(Player player1, Player player2)
         {
             _spellView.RenderPhaseLabel(this.GetType());
+            
+            
             _spellView.RenderPlayerHand(player1);
             _spellView.RenderPlayerHand(player2);
             _spellView.RenderPhaseExit(this.GetType());

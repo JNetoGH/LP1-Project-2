@@ -5,7 +5,6 @@ namespace TragicTheReckoning
 {
     public class Player
     {
-        
         public const int ManaLimit = 5;
         public const int MaxCardsInHand = 6;
         
@@ -26,7 +25,7 @@ namespace TragicTheReckoning
             Hand = new List<Card>();
             
             // GIVE THE PLAYER THE 6 INITIAL CARDS, THE DECK IS ALREADY SHUFFLED
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < MaxCardsInHand; i++)
                 BuyNewCard();
             
         }
@@ -39,6 +38,5 @@ namespace TragicTheReckoning
         }
 
         public override string ToString() => $"{Name} (HP: {HealthPoints}) (MP: {ManaPoints})";
-        
     }
 }
