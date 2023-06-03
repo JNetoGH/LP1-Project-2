@@ -22,7 +22,7 @@ namespace TragicTheReckoning
             Hand = new List<Card>();
             
             // GIVE THE PLAYER THE 6 INITIAL CARDS, THE DECK IS ALREADY SHUFFLED
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 5; i++)
                 Buy();
             
         }

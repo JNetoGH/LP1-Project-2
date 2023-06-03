@@ -6,9 +6,13 @@ namespace TragicTheReckoning.Controllers
 {
     public class GameLoop
     {
-        private const int ManaLimit = 5;
+        public const int ManaLimit = 5;
+        public const int MaxCardsInHand = 6;
+        
         private readonly Player _player1;
         private readonly Player _player2;
+        
+        private readonly BuyingPhase _buyingPhase;
         private readonly SpellPhase _spellPhase;
         private readonly BattlePhase _battlePhase;
 
@@ -16,6 +20,8 @@ namespace TragicTheReckoning.Controllers
         {
             _player1 = player1;
             _player2 = player2;
+
+            _buyingPhase = new BuyingPhase();
             _spellPhase = new SpellPhase(player1, player2);
             _battlePhase = new BattlePhase(player1, player2);
         }
@@ -23,13 +29,14 @@ namespace TragicTheReckoning.Controllers
         public void Run()
         {
             InitGame(_player1, _player2);
-            
-            int counter = 1;
+           
             // Game Loop
+            int counter = 1;
             do
             {
                 _player1.ManaPoints = counter >= ManaLimit ? ManaLimit : counter;
                 _player2.ManaPoints = counter >= ManaLimit ? ManaLimit : counter;
+                _buyingPhase.RunPhase(_player1, _player2);
                 _spellPhase.RunPhase(_player1, _player2);
                 _battlePhase.RunPhase(_player1, _player2);
                 counter++;
