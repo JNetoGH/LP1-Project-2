@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TragicTheReckoning.Controllers;
 
 namespace TragicTheReckoning
 {
@@ -30,5 +31,15 @@ namespace TragicTheReckoning
             Hand.Add(c);
             Deck.cardPool.Remove(c);
         }
+        
+        
+        //PRECISO DE UMA REFERÊNCIA AO GAMELOOP DENTRO DO BUY FINALIZADO
+        //PARA PODER CHAMAR O GETWINNER CASO O JOGADOR DÊ DRAW À ULTIMA CARTA
+        //COM O CÓDIGO ABAIXO
+
+        //if(cardPool.Length <= 0)
+        //{
+        //    GameLoop.GetWinner();
+        //}
     }
 }
