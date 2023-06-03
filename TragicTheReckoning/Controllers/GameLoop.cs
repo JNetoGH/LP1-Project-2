@@ -8,7 +8,6 @@ namespace TragicTheReckoning.Controllers
     {
         private readonly Player _player1;
         private readonly Player _player2;
-        
         private readonly BuyingPhase _buyingPhase;
         private readonly SpellPhase _spellPhase;
         private readonly BattlePhase _battlePhase;
@@ -24,11 +23,11 @@ namespace TragicTheReckoning.Controllers
         
         public void Run()
         {
-
-            Player winner = null;
+            
             InitGame(_player1, _player2);
             
             // Game Loop
+            Player winner = null;
             int counter = 1;
             do
             {
@@ -43,6 +42,7 @@ namespace TragicTheReckoning.Controllers
             } while (winner == null);
             
             // greeting msg
+            Console.WriteLine($"The winner is {winner.Name}");
         }
 
         private void InitGame(params Player[] players)

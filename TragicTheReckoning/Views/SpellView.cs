@@ -8,7 +8,7 @@ namespace TragicTheReckoning.Views
         public void RenderPlayerHand(Player player)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append(player.ToString());
+            stringBuilder.Append("\n" + player.ToString());
             stringBuilder.Append($"\nhand:" );
             foreach (Card card in player.Hand)
                 stringBuilder.Append($" {card.Name},");
