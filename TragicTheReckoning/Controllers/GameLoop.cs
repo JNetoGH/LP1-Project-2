@@ -11,6 +11,8 @@ namespace TragicTheReckoning.Controllers
         private readonly SpellPhase _spellPhase;
         private readonly BattlePhase _battlePhase;
 
+        public static bool gameLoop { set; get; } = true;
+
         public GameLoop(Player player1, Player player2)
         {
             _player1 = player1;
@@ -28,8 +30,8 @@ namespace TragicTheReckoning.Controllers
             {
                 _spellPhase.RunPhase(_player1, _player2);
                 _battlePhase.RunPhase(_player1, _player2);
-            } while (TryGetWinner() is null);
-            
+            } while (gameLoop == true);
+
             // greeting msg
         }
         
@@ -41,13 +43,23 @@ namespace TragicTheReckoning.Controllers
             }
         }
 
-        private Player TryGetWinner()
+        private Player GetWinner()
         {
-            if (_player2.HealthPoints <= 0)
-                return _player1;
-            if (_player1.HealthPoints <= 0)
+            gameLoop = false;
+            
+            if (_player1.HealthPoints == _player2.HealthPoints)
+            {
+                //DRAW
+                return null;
+            }
+            else if (_player1.HealthPoints < _player2.HealthPoints)
+            {
                 return _player2;
-            return null;
+            }
+            else
+            {
+                return _player1;
+            }
         }
         
     }
