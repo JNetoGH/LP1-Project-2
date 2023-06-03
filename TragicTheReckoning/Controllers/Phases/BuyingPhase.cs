@@ -15,11 +15,18 @@ namespace TragicTheReckoning.Controllers.Phases
             _buyingView.RenderPhaseLabel(roundNumber,this.GetType());
             foreach (Player player in players)
             {
+                if (!player.HasCardsInDeck)
+                {
+                    _buyingView.RenderEmptyDeckMsg(player);
+                    continue;
+                }
+
                 if (!CanBuyACard(player))
                 {
                     _buyingView.RenderNotAllowedToBuyText(player);
                     continue;
                 }
+                
                 bool hasBoughtACard = _buyingView.RenderBuyingOption(player);
                 if (hasBoughtACard)
                     player.BuyNewCard();
@@ -29,6 +36,5 @@ namespace TragicTheReckoning.Controllers.Phases
         }
 
         private bool CanBuyACard(Player player) => player.Hand.Count < Player.MaxCardsInHand;
-        
     }
 }

@@ -7,8 +7,9 @@ namespace TragicTheReckoning.Models
     {
         private const int ManaLimit = 5;
         public const int MaxCardsInHand = 6;
+        public bool HasCardsInDeck => Deck.cardPool.Count > 0;
         
-        private Deck Deck { get; set; }
+        public Deck Deck { get; private set; }
         public List<Card> Hand { get; private set; }
         public Queue<Card> CardsInArena { get; private set; }
         
@@ -39,11 +40,14 @@ namespace TragicTheReckoning.Models
                 BuyNewCard();
         }
         
-        public void BuyNewCard()
+        public bool BuyNewCard()
         {
+            if (!HasCardsInDeck)
+                return false;
             Card c = Deck.cardPool[0];
             Hand.Add(c);
             Deck.cardPool.Remove(c);
+            return true;
         }
 
         public bool TrySendCartFromHandToArena(Card card)
