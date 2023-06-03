@@ -13,24 +13,27 @@ namespace TragicTheReckoning
         
         public string Name { get; private set; }
         public int HealthPoints { get; set; }
-        private int _manaPoints;
+        private int _manaPoints = 0;
         public int ManaPoints
         {
             get => _manaPoints;
             set => _manaPoints = value >= Player.ManaLimit ? Player.ManaLimit : value;
         }
         
-        public Player(string name, int manaPoints, int healthPoints)
+        public Player(string name)
         {
             Name = name;
-            ManaPoints = manaPoints;
-            HealthPoints = healthPoints;
-            
+            SetPlayerToDefault();
+        }
+
+        public void SetPlayerToDefault()
+        {
+            HealthPoints = 10;
+            ManaPoints = 0;
             Deck = new Deck();
             Hand = new List<Card>();
-            
             // GIVE THE PLAYER THE 6 INITIAL CARDS, THE DECK IS ALREADY SHUFFLED
-            for (int i = 0; i < MaxCardsInHand-1; i++)
+            for (int i = 0; i < MaxCardsInHand; i++)
                 BuyNewCard();
         }
         

@@ -9,9 +9,9 @@ namespace TragicTheReckoning.Views
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append("\n" + player.ToString());
-            stringBuilder.Append($"\nhand:" );
+            stringBuilder.Append($"\n\nhand:" );
             foreach (Card card in player.Hand)
-                stringBuilder.Append($" {card.Name},");
+                stringBuilder.Append($"\n{card}");
             Console.WriteLine(stringBuilder.ToString().TrimEnd(','));
         }
     }

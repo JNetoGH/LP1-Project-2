@@ -10,8 +10,8 @@ namespace TragicTheReckoning
 
             GameLoop gameLoop = new GameLoop
             (
-                new Player("Jneto", 3, 10),
-                new Player("Bugs",44, 123)
+                new Player("Jneto"),
+                new Player("Bugs")
             );
             
             gameLoop.Run();

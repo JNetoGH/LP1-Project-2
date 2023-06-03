@@ -19,7 +19,7 @@ namespace TragicTheReckoning
 
         public override string ToString()
         {
-            return Name;
+            return $"{Name} (Cost:{Cost}) (AP:{AttackPoints}) (DP:{DefencePoints})";
         }
         
     }

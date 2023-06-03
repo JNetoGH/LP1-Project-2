@@ -23,7 +23,6 @@ namespace TragicTheReckoning.Controllers
         
         public void Run()
         {
-            
             InitGame(_player1, _player2);
             
             // Game Loop
@@ -48,9 +47,7 @@ namespace TragicTheReckoning.Controllers
         private void InitGame(params Player[] players)
         {
             foreach (Player player in players)
-            {
-                Console.WriteLine("Initializing game ...");
-            }
+                player.SetPlayerToDefault();
         }
 
         // RETORNA O VENCEDOR, ENQUANTO NAO HOUVER RERTONA NULL
