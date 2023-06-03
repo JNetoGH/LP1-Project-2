@@ -59,7 +59,7 @@ namespace TragicTheReckoning.Views
 
         public bool RenderTransferringOption()
         {
-            return GetTreatedBooleanInput("Do you want to transfer a card from your deck to the arena?");
+            return GetTreatedBooleanInput("Do you want to transfer a card from your hand to the arena?");
         }
 
         public string AskACardToPlayer()
