@@ -1,5 +1,5 @@
-﻿using System;
-using TragicTheReckoning.Controllers;
+﻿using TragicTheReckoning.Controllers;
+
 
 namespace TragicTheReckoning
 {

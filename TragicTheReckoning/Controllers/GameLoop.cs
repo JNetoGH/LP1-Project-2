@@ -6,7 +6,7 @@ namespace TragicTheReckoning.Controllers
 {
     public class GameLoop
     {
-        private const int ManaLimit = 6;
+        private const int ManaLimit = 5;
         private readonly Player _player1;
         private readonly Player _player2;
         private readonly SpellPhase _spellPhase;
