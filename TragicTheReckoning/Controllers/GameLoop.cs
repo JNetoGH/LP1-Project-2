@@ -56,7 +56,6 @@ namespace TragicTheReckoning.Controllers
         // RETORNA O VENCEDOR, ENQUANTO NAO HOUVER RERTONA NULL
         private Player TryGetWinner()
         {
-            _player1.HealthPoints = -133;
             if (_player2.HealthPoints <= 0) return _player1;
             if (_player1.HealthPoints <= 0) return _player2;
             return null;

@@ -5,11 +5,6 @@ namespace TragicTheReckoning.Views
     public class BuyingView: View
     {
         
-        public void RenderBuyingRound(Player player)
-        {
-            RenderExitWithInput($"\nATTENTION! {player.Name} will start");
-        }
-        
         public void RenderNotAllowedToBuyText(Player player)
         {
             Console.WriteLine($"\n{player.Name} has {Player.MaxCardsInHand} or more cards, you can't buy any more");
