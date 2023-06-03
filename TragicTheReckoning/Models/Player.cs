@@ -41,7 +41,7 @@ namespace TragicTheReckoning.Models
         
         public void BuyNewCard()
         {
-            Card c = Deck.cardPool[Deck.cardPool.Count - 1];
+            Card c = Deck.cardPool[0];
             Hand.Add(c);
             Deck.cardPool.Remove(c);
         }
