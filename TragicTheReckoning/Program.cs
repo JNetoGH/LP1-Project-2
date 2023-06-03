@@ -1,4 +1,5 @@
 ﻿using TragicTheReckoning.Controllers;
+using TragicTheReckoning.Models;
 
 
 namespace TragicTheReckoning

@@ -28,7 +28,7 @@ namespace TragicTheReckoning.Views
         
         protected void RenderExitWithInput(string msg)
         {
-            Console.WriteLine($"\n{msg}\nPRESS ANY KEY TO CONTINUE");
+            Console.WriteLine($"\n{msg}\nPRESS ENTER TO CONTINUE");
             Console.ReadLine();
         }
         
@@ -38,11 +38,11 @@ namespace TragicTheReckoning.Views
             bool isInputValid = false;
             while (!isInputValid)
             {
-                Console.Write($"{msg} [Y/N]: ");
+                Console.Write($"{msg} [y/n]: ");
                 string untreatedInput = Console.ReadLine();
                 
-                // Checking if the string is empty or not
-                if (untreatedInput != null)
+                // Checking if the string is neither empty nor null
+                if (untreatedInput != null && ! untreatedInput.Equals(string.Empty))
                     untreatedInput = untreatedInput.ToUpper().Trim();
                 else
                 {
@@ -59,11 +59,11 @@ namespace TragicTheReckoning.Views
             }
             return treatedInput.Equals("Y");
         }
-
-        private void RenderInvalidInputMsg()
+        
+        public void RenderInvalidInputMsg(string msg = "Sorry the input is not valid. Let's try again.")
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Sorry the input is not valid. Let's try again.");
+            Console.WriteLine(msg);
             Console.ForegroundColor = ConsoleColor.White;
         }
     }

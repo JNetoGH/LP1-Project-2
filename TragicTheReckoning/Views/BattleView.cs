@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Text;
+using TragicTheReckoning.Models;
 
-namespace TragicTheReckoning
+namespace TragicTheReckoning.Views
 {
     public class BattleView
     {

@@ -1,4 +1,6 @@
-﻿namespace TragicTheReckoning.Controllers.Interfaces
+﻿using TragicTheReckoning.Models;
+
+namespace TragicTheReckoning.Controllers.Interfaces
 {
     public interface IPhase
     {

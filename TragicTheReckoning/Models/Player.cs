@@ -1,15 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
-namespace TragicTheReckoning
+namespace TragicTheReckoning.Models
 {
     public class Player
     {
-        
-        public const int ManaLimit = 5;
+        private const int ManaLimit = 5;
         public const int MaxCardsInHand = 6;
         
         private Deck Deck { get; set; }
         public List<Card> Hand { get; private set; }
+        public Queue<Card> CardsInArena { get; private set; }
         
         public string Name { get; private set; }
         public int HealthPoints { get; set; }
@@ -25,13 +26,14 @@ namespace TragicTheReckoning
             Name = name;
             SetPlayerToDefault();
         }
-
+        
         public void SetPlayerToDefault()
         {
             HealthPoints = 10;
             ManaPoints = 0;
             Deck = new Deck();
             Hand = new List<Card>();
+            CardsInArena = new Queue<Card>();
             // GIVE THE PLAYER THE 6 INITIAL CARDS, THE DECK IS ALREADY SHUFFLED
             for (int i = 0; i < MaxCardsInHand; i++)
                 BuyNewCard();
@@ -44,6 +46,26 @@ namespace TragicTheReckoning
             Deck.cardPool.Remove(c);
         }
 
+        public bool TrySendCartFromHandToArena(Card card)
+        {
+            Card pickedCard = null;
+            
+            foreach (Card cardInHand in Hand)
+                if (cardInHand == card)
+                    pickedCard = cardInHand;
+            
+            if (pickedCard == null)
+                throw new Exception("tried to move from hand to battle arena a card that doesn't exist");
+
+            if (card.Cost > ManaPoints) 
+                return false;
+            
+            CardsInArena.Enqueue(pickedCard);
+            Hand.Remove(pickedCard);
+            ManaPoints -= card.Cost;
+            return true;
+        }
+        
         public override string ToString() => $"{Name} (HP: {HealthPoints}) (MP: {ManaPoints})";
         
     }

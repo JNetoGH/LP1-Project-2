@@ -1,4 +1,5 @@
 ﻿using System;
+using TragicTheReckoning.Models;
 
 namespace TragicTheReckoning.Views
 {

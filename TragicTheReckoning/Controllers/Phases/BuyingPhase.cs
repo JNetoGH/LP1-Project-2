@@ -1,5 +1,6 @@
 ﻿using System;
 using TragicTheReckoning.Controllers.Interfaces;
+using TragicTheReckoning.Models;
 using TragicTheReckoning.Views;
 
 namespace TragicTheReckoning.Controllers.Phases

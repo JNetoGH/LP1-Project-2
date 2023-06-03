@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TragicTheReckoning
+﻿namespace TragicTheReckoning.Models
 {
     public class Card
     {   
