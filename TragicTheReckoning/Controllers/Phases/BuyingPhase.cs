@@ -1,5 +1,4 @@
-﻿using System;
-using TragicTheReckoning.Controllers.Interfaces;
+﻿using TragicTheReckoning.Controllers.Interfaces;
 using TragicTheReckoning.Models;
 using TragicTheReckoning.Views;
 
@@ -11,10 +10,9 @@ namespace TragicTheReckoning.Controllers.Phases
    
         public BuyingPhase() => _buyingView = new BuyingView();
 
-        public void RunPhase(Player player1, Player player2)
+        public void RunPhase(params Player[] players)
         {
             _buyingView.RenderPhaseLabel(this.GetType());
-            Player[] players = new[] { player1, player2 };
             foreach (Player player in players)
             {
                 if (!CanBuyACard(player))
@@ -25,7 +23,7 @@ namespace TragicTheReckoning.Controllers.Phases
                 bool hasBoughtACard = _buyingView.RenderBuyingOption(player);
                 if (hasBoughtACard)
                     player.BuyNewCard();
-                _buyingView.RenderHasBoughtANewCard(player, hasBoughtACard);
+                _buyingView.RenderBuyingStatus(player, hasBoughtACard);
             }
             _buyingView.RenderPhaseExit(this.GetType());
         }

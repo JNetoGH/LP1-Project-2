@@ -10,58 +10,57 @@ namespace TragicTheReckoning.Controllers.Phases
         private readonly SpellView _spellView;
         public SpellPhase() => _spellView = new SpellView();
 
-        public void RunPhase(Player player1, Player player2)
+        public void RunPhase(params Player[] players)
         {
-            while (true) // buying loop
+            foreach (Player player in players)
+            {
+                _spellView.RenderPlayerRoundIntroduction(player);
+                RunTransferringLoop(player);
+            }
+            _spellView.ClearScreen();
+            _spellView.RenderPhaseExit(this.GetType());
+        }
+
+        private void RunTransferringLoop(Player player)
+        {
+            while (true) // transferring loop
             {
                 _spellView.RenderPhaseLabel(this.GetType());
-                _spellView.RenderPlayerStats(player1);
-                _spellView.RenderPlayerHand(player1);
-                _spellView.RenderPlayerCardsInArena(player1);
+                _spellView.RenderPlayerStats(player);
+                _spellView.RenderPlayerHand(player);
+                _spellView.RenderPlayerCardsInArena(player);
                 
                 // Checks if the player wish to buy a card, if not just breaks the buying loop
                 bool option = _spellView.RenderTransferringOption();
                 if (!option) break;
                 
-                // Input Validation Sequence, first of all, checks if it's neither null nor an empty string
-                Console.Write("Insert the number of the card you want to transfer to the arena: ");
-                string untreatedInput = Console.ReadLine();
-                if (untreatedInput != null && ! untreatedInput.Equals(string.Empty))
+                // Input Validation Sequence, this method already validates if it's neither null nor an empty string
+                string input = _spellView.GetValidStringInput(
+                    "Insert the number of the card you want to transfer to the arena: ");
+                
+                // Checks if the input is a number or not
+                int index = 0;
+                bool isInputANumber = int.TryParse(input, out index);
+                if (isInputANumber)
                 {
-                    untreatedInput = untreatedInput.ToUpper().Trim();
-                    
-                    // Checks if the input is a number or not
-                    int index = 0;
-                    bool isInputANumber = int.TryParse(untreatedInput, out index);
-                    if (isInputANumber)
+                    index -= 1; // transforms the input to the correspondent index
+                    try // Checks if the input is in range with the hands and if player has enough mana to do so
                     {
-                        index -= 1; // transforms the input to the correspondent index
-                        try // Checks if the input is in range with the hands and if player has enough mana to do so
-                        {
-                            // checks if the player has enough mana or not to transfer the card
-                            bool hasEnoughMana = player1.TrySendCartFromHandToArena(player1.Hand[index]);
-                            if (hasEnoughMana) Console.WriteLine("Card moved to arena");
-                            else _spellView.RenderInvalidInputMsg("Sorry, you don't have enough mana do do it.");
-                        }
-                        catch (Exception)
-                        {
-                            _spellView.RenderInvalidInputMsg("Sorry the Chosen Card doesn't exist.");
-                        }
+                        // checks if the player has enough mana or not to transfer the card
+                        bool hasEnoughMana = player.TrySendCartFromHandToArena(player.Hand[index]);
+                        _spellView.RenderHasTransferringStatus(hasEnoughMana);
+                        _spellView.RenderExitWithInput();
+                    }
+                    catch (Exception)
+                    {
+                        _spellView.RenderInvalidInputMsg("Sorry the Chosen Card doesn't exist.");
+                        _spellView.RenderExitWithInput();
                     }
                 }
-                else _spellView.RenderInvalidInputMsg();
-                
-                
-                Console.WriteLine("\nPress enter to continue");
-                Console.ReadLine();
+               
             }
-            
-            _spellView.RenderPhaseExit(this.GetType());
         }
         
-        
     }
-    
-
     
 }

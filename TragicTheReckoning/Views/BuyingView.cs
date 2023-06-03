@@ -13,11 +13,12 @@ namespace TragicTheReckoning.Views
         
         public bool RenderBuyingOption(Player player)
         {
-            Console.WriteLine($"\n{player.Name} has less than {Player.MaxCardsInHand} cards, you can buy a new card!");
+            Console.WriteLine($"\n{player.Name} has less than {Player.MaxCardsInHand} cards" +
+                              $" (tot: {player.Hand.Count}), you can buy a new card!");
             return GetTreatedBooleanInput("Do you want to buy a new card?");
         }
         
-        public void RenderHasBoughtANewCard(Player player, bool bought)
+        public void RenderBuyingStatus(Player player, bool bought)
         {
             Console.WriteLine(bought
                 ? $"{player.Name} bought a new card"

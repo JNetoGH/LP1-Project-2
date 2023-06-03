@@ -5,7 +5,7 @@ namespace TragicTheReckoning.Views
     public class View
     {
 
-        public void  RenderPhaseLabel(Type phase, ConsoleColor nameColor = ConsoleColor.Cyan)
+        public void RenderPhaseLabel(Type phase, ConsoleColor nameColor = ConsoleColor.Cyan)
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -16,20 +16,39 @@ namespace TragicTheReckoning.Views
             Console.BackgroundColor = 0;
             Console.ForegroundColor = ConsoleColor.White;
         }
-    
+
         public void RenderPhaseExit(Type phase)
         {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.BackgroundColor = ConsoleColor.DarkGray;
-            RenderExitWithInput($"{phase.Name} has finished!");
+            RenderExitWithInput($"{phase.Name} has finished! ", ConsoleColor.Yellow, ConsoleColor.DarkGray);
+        }
+        
+        public void RenderExitWithInput(string msg = "", 
+            ConsoleColor foregroundColor = ConsoleColor.White,
+            ConsoleColor backgroundColor = 0)
+        {
+            Console.ForegroundColor = foregroundColor;
+            Console.BackgroundColor = backgroundColor;
+            Console.WriteLine($"\n{msg}PRESS ENTER TO CONTINUE");
+            Console.ReadLine();
             Console.BackgroundColor = 0;
             Console.ForegroundColor = ConsoleColor.White;
         }
-        
-        protected void RenderExitWithInput(string msg)
+
+        public string GetValidStringInput(string msg)
         {
-            Console.WriteLine($"\n{msg}\nPRESS ENTER TO CONTINUE");
-            Console.ReadLine();
+            string input = "";
+            while (true)
+            {
+                Console.Write(msg);
+                string untreatedInput = Console.ReadLine();
+                if (untreatedInput != null && ! untreatedInput.Equals(string.Empty))
+                {
+                    input = untreatedInput.Trim();
+                    break;
+                }
+                else RenderInvalidInputMsg();
+            }
+            return input;
         }
         
         protected bool GetTreatedBooleanInput(string msg)
@@ -59,12 +78,18 @@ namespace TragicTheReckoning.Views
             }
             return treatedInput.Equals("Y");
         }
-        
+
         public void RenderInvalidInputMsg(string msg = "Sorry the input is not valid. Let's try again.")
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(msg);
             Console.ForegroundColor = ConsoleColor.White;
         }
+
+        public void ClearScreen()
+        {
+            Console.Clear();
+        }
+        
     }
 }

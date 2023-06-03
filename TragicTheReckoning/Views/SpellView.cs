@@ -6,19 +6,26 @@ namespace TragicTheReckoning.Views
 {
     public class SpellView: View
     {
-
+        
+        public void RenderPlayerRoundIntroduction(Player player)
+        {
+            Console.Clear();
+            string msg = $"Spell Phase of {player.Name} will occur.\nPlease make sure nobody is watching.\n";
+            RenderExitWithInput(msg, ConsoleColor.Cyan);
+        }
+        
         public void RenderPlayerStats(Player player)
         {
             Console.WriteLine($"\nRound of: \n{player}");
         }
-        
+
         public void RenderPlayerHand(Player player)
         {
             Console.WriteLine("\nHand:" );
             if (player.Hand.Count <= 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("This player arena hand is empty, you can't play a card this turn\n");
+                Console.WriteLine("This player arena hand is empty, you can't play a card this turn.\n");
                 Console.ForegroundColor = ConsoleColor.White;
                 return;
             }
@@ -37,7 +44,7 @@ namespace TragicTheReckoning.Views
             if (player.CardsInArena.Count <= 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("This player arena sequence is empty, you can receive direct dmg\n");
+                Console.WriteLine("This player arena sequence is empty, you can receive direct dmg.\n");
                 Console.ForegroundColor = ConsoleColor.White;
                 return;
             }
@@ -55,11 +62,9 @@ namespace TragicTheReckoning.Views
             return GetTreatedBooleanInput("Do you want to transfer a card from your deck to the arena?");
         }
         
-        public void RenderHasTransferredACard(Player player, bool transferred)
+        public void RenderHasTransferringStatus(bool transferred)
         {
-            Console.WriteLine(transferred
-                ? $"{player.Name} bought a new card"
-                : $"{player.Name} has chosen not to buy a new card");
+            Console.WriteLine(transferred ? "Card moved to arena" : "Sorry, you don't have enough mana do do it.");
         }
         
     }
