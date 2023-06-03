@@ -26,8 +26,7 @@ namespace TragicTheReckoning.Controllers
         public void Run()
         {
             InitGame(_player1, _player2);
-            _player1.Deck.cardPool = new List<Card>();
-
+            
             // Game Loop
             Player winner = null;
             int counter = 1;
