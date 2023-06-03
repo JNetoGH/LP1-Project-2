@@ -37,7 +37,7 @@ namespace TragicTheReckoning.Views
             }
             Console.WriteLine(stringBuilder.ToString().TrimEnd(','));
         }
-
+        
         public void RenderPlayerCardsInArena(Player player)
         {
             Console.WriteLine("Cards in arena:" );
@@ -56,15 +56,21 @@ namespace TragicTheReckoning.Views
             }
             Console.WriteLine(stringBuilder.ToString().TrimEnd(','));
         }
-        
+
         public bool RenderTransferringOption()
         {
             return GetTreatedBooleanInput("Do you want to transfer a card from your deck to the arena?");
         }
-        
+
+        public string AskACardToPlayer()
+        {
+            return GetValidStringInput("Insert the number of the card you want to transfer to the arena: ");
+        }
+
         public void RenderHasTransferringStatus(bool transferred)
         {
-            Console.WriteLine(transferred ? "Card moved to arena" : "Sorry, you don't have enough mana do do it.");
+            if (transferred) Console.WriteLine("Card moved to arena");
+            else RenderInvalidInputMsg("Sorry, you don't have enough mana do do it.");
         }
         
     }

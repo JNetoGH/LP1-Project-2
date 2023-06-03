@@ -35,8 +35,7 @@ namespace TragicTheReckoning.Controllers.Phases
                 if (!option) break;
                 
                 // Input Validation Sequence, this method already validates if it's neither null nor an empty string
-                string input = _spellView.GetValidStringInput(
-                    "Insert the number of the card you want to transfer to the arena: ");
+                string input = _spellView.AskACardToPlayer();
                 
                 // Checks if the input is a number or not
                 int index = 0;
@@ -49,15 +48,13 @@ namespace TragicTheReckoning.Controllers.Phases
                         // checks if the player has enough mana or not to transfer the card
                         bool hasEnoughMana = player.TrySendCartFromHandToArena(player.Hand[index]);
                         _spellView.RenderHasTransferringStatus(hasEnoughMana);
-                        _spellView.RenderExitWithInput();
                     }
                     catch (Exception)
                     {
-                        _spellView.RenderInvalidInputMsg("Sorry the Chosen Card doesn't exist.");
-                        _spellView.RenderExitWithInput();
+                        _spellView.RenderInvalidInputMsg();
                     }
                 }
-               
+                _spellView.RenderExitWithInput();
             }
         }
         
