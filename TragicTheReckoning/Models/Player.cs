@@ -11,7 +11,7 @@ namespace TragicTheReckoning.Models
         
         public Deck Deck { get; private set; }
         public List<Card> Hand { get; private set; }
-        public Queue<Card> CardsInArena { get; private set; }
+        public List<Card> CardsInArena { get; private set; }
         
         public string Name { get; private set; }
         public int HealthPoints { get; set; }
@@ -34,7 +34,7 @@ namespace TragicTheReckoning.Models
             ManaPoints = 0;
             Deck = new Deck();
             Hand = new List<Card>();
-            CardsInArena = new Queue<Card>();
+            CardsInArena = new List<Card>();
             // GIVE THE PLAYER THE 6 INITIAL CARDS, THE DECK IS ALREADY SHUFFLED
             for (int i = 0; i < MaxCardsInHand; i++)
                 BuyNewCard();
@@ -64,7 +64,7 @@ namespace TragicTheReckoning.Models
             if (card.Cost > ManaPoints) 
                 return false;
             
-            CardsInArena.Enqueue(pickedCard);
+            CardsInArena.Add(pickedCard);
             Hand.Remove(pickedCard);
             ManaPoints -= card.Cost;
             return true;
