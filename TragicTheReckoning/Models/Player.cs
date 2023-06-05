@@ -49,10 +49,10 @@ namespace TragicTheReckoning.Models
             Hand.Add(c);
             Deck.cardPool.Remove(c);
 
-            if (!HasCardsInDeck)
+            if(!HasCardsInDeck)
             {
-                GameLoop.Running = false;
                 Console.WriteLine("The deck has run out of cards!");
+                throw new Exception();
             }
             return true;
         }
@@ -71,7 +71,7 @@ namespace TragicTheReckoning.Models
             if (card.Cost > ManaPoints) 
                 return false;
             
-            CardsInArena.Add(pickedCard);
+            CardsInArena.Insert(0, pickedCard);
             Hand.Remove(pickedCard);
             ManaPoints -= card.Cost;
             return true;

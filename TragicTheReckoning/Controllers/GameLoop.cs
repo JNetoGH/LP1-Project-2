@@ -15,7 +15,8 @@ namespace TragicTheReckoning.Controllers
         private readonly BattlePhase _battlePhase;
         private readonly EndPhase _endPhase;
 
-        public static bool Running = true;
+        private bool _running = true;
+
         public GameLoop(Player player1, Player player2)
         {
             _player1 = player1;
@@ -32,38 +33,43 @@ namespace TragicTheReckoning.Controllers
 
             // Game Loop
             int counter = 1;
+
             do
             {
                 _player1.ManaPoints = counter;
                 _player2.ManaPoints = counter;
-                _buyingPhase.RunPhase(counter, _player1, _player2);
-                _spellPhase.RunPhase(counter, _player1, _player2);
-                _battlePhase.RunPhase(counter, _player1, _player2);
-                counter++;
 
-            } while (Running);
+                try
+                {
+                    _buyingPhase.RunPhase(counter, _player1, _player2);
+                    _spellPhase.RunPhase(counter, _player1, _player2);
+                    _battlePhase.RunPhase(counter, _player1, _player2);
+                    counter++;
+                }
+                catch (Exception)
+                {
+                    _running = false;
+                }
+                
+            } while (_running);
 
             _endPhase.RunPhase(GetWinner());
         }
-        
+
         private void InitGame(params Player[] players)
         {
             foreach (Player player in players)
                 player.SetPlayerToDefault();
         }
-        
+
         private Player GetWinner()
         {
-            if(_player2.HealthPoints <= 0)
+            if (_player1.HealthPoints == _player2.HealthPoints)
             {
-                return _player1;
+                return null;
             }
-            if(_player1.HealthPoints <= 0)
-            {
-                return _player2;
-            }
-            return null;
-        }
 
+            return (_player1.HealthPoints < _player2.HealthPoints) ? _player2 : _player1;
+        }
     }
 }
