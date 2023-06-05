@@ -37,18 +37,18 @@ namespace TragicTheReckoning.Controllers.Phases
                 }   
             }
             
-            while (_player1.CardsInArena.Count > 0 & _player2.CardsInArena.Count > 0)
+            while (_player1.CardsInArena.Count > 0 && _player2.CardsInArena.Count > 0)
             {
                 Card player1Card = _player1.CardsInArena[0];
                 Card player2Card = _player2.CardsInArena[0];
                 
-                if (_player1.CardsInArena[0].currentAttackPoints <= 0 & 
+                if (_player1.CardsInArena[0].currentAttackPoints <= 0 && 
                     _player2.CardsInArena[0].currentAttackPoints <= 0)
                 {
                     break;
                 }
 
-                if (player1Card.DefencePoints > 0 & player2Card.DefencePoints > 0)
+                if (player1Card.DefencePoints > 0 && player2Card.DefencePoints > 0)
                 {
                     int p1AttackPoints = player1Card.currentAttackPoints;
                     player1Card.currentAttackPoints -= player2Card.DefencePoints;
@@ -59,7 +59,7 @@ namespace TragicTheReckoning.Controllers.Phases
                     player1Card.DefencePoints -= p2AttackPoints;
                 }
 
-                while(player1Card.currentAttackPoints > 0 & player1Card.DefencePoints > 0)
+                while(player1Card.currentAttackPoints > 0 && player1Card.DefencePoints > 0)
                 {
                     int currentAttackPoints = player1Card.currentAttackPoints;
                     int index = 1;
@@ -77,7 +77,7 @@ namespace TragicTheReckoning.Controllers.Phases
                     index++;
                 }
                 
-                while(player2Card.currentAttackPoints > 0 & player2Card.DefencePoints > 0)
+                while(player2Card.currentAttackPoints > 0 && player2Card.DefencePoints > 0)
                 {
                     int currentAttackPoints = player2Card.currentAttackPoints;
                     int index = 1;
@@ -126,7 +126,7 @@ namespace TragicTheReckoning.Controllers.Phases
                 }
             }
 
-            if (_player1.HealthPoints <= 0 | _player2.HealthPoints <= 0)
+            if (_player1.HealthPoints <= 0 || _player2.HealthPoints <= 0)
             {
                 throw new Exception();
             }
