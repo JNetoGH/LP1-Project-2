@@ -13,7 +13,9 @@ namespace TragicTheReckoning.Controllers
         private readonly BuyingPhase _buyingPhase;
         private readonly SpellPhase _spellPhase;
         private readonly BattlePhase _battlePhase;
+        private readonly EndPhase _endPhase;
 
+        public static bool Running = true;
         public GameLoop(Player player1, Player player2)
         {
             _player1 = player1;
@@ -21,14 +23,14 @@ namespace TragicTheReckoning.Controllers
             _buyingPhase = new BuyingPhase();
             _spellPhase = new SpellPhase();
             _battlePhase = new BattlePhase(player1, player2);
+            _endPhase = new EndPhase();
         }
-        
+
         public void Run()
         {
             InitGame(_player1, _player2);
-            
+
             // Game Loop
-            Player winner = null;
             int counter = 1;
             do
             {
@@ -38,27 +40,30 @@ namespace TragicTheReckoning.Controllers
                 _spellPhase.RunPhase(counter, _player1, _player2);
                 _battlePhase.RunPhase(counter, _player1, _player2);
                 counter++;
-                winner = TryGetWinner();
-                
-            } while (winner == null);
-            
-            // greeting msg
-            Console.WriteLine($"The winner is {winner.Name}");
-        }
 
+            } while (Running);
+
+            _endPhase.RunPhase(GetWinner());
+        }
+        
         private void InitGame(params Player[] players)
         {
             foreach (Player player in players)
                 player.SetPlayerToDefault();
         }
-
-        // RETORNA O VENCEDOR, ENQUANTO NAO HOUVER RERTONA NULL
-        private Player TryGetWinner()
+        
+        private Player GetWinner()
         {
-            if (_player2.HealthPoints <= 0) return _player1;
-            if (_player1.HealthPoints <= 0) return _player2;
+            if(_player2.HealthPoints <= 0)
+            {
+                return _player1;
+            }
+            if(_player1.HealthPoints <= 0)
+            {
+                return _player2;
+            }
             return null;
         }
-        
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TragicTheReckoning.Controllers;
 
 namespace TragicTheReckoning.Models
 {
@@ -47,6 +48,12 @@ namespace TragicTheReckoning.Models
             Card c = Deck.cardPool[0];
             Hand.Add(c);
             Deck.cardPool.Remove(c);
+
+            if (!HasCardsInDeck)
+            {
+                GameLoop.Running = false;
+                Console.WriteLine("The deck has run out of cards!");
+            }
             return true;
         }
 

@@ -97,6 +97,11 @@ namespace TragicTheReckoning.Controllers.Phases
 
                 foreach (Player player in players)
                 {
+                    if (player.HealthPoints <= 0)
+                    {
+                        GameLoop.Running = false;
+                        break;
+                    }
                     foreach (Card card in player.CardsInArena)
                     {
                         if (card.currentDefencePoints <= 0)
@@ -106,7 +111,12 @@ namespace TragicTheReckoning.Controllers.Phases
                     }   
                 }
 
-                if (_player1.CardsInArena[0].currentAttackPoints <= 0 &
+                if (GameLoop.Running == false)
+                {
+                    break;
+                }
+
+                if (_player1.CardsInArena[0].currentAttackPoints <= 0 & 
                     _player2.CardsInArena[0].currentAttackPoints <= 0)
                 {
                     break;
@@ -125,14 +135,14 @@ namespace TragicTheReckoning.Controllers.Phases
                 }
                 else
                 {
-                    foreach (Card card in _player2.CardsInArena)
+                    foreach(Card card in _player2.CardsInArena)
                     {
                         _player1.HealthPoints -= card.currentAttackPoints;
                         _player2.CardsInArena.Remove(card);
                     }
                 }
             }
-            
+
         }
     }
 }
