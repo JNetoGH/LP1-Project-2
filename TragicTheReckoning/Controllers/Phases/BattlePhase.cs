@@ -34,7 +34,6 @@ namespace TragicTheReckoning.Controllers.Phases
                 foreach (Card card in player.CardsInArena)
                 {
                     card.currentAttackPoints = card.maxAttackPoints;
-                    card.currentDefencePoints = card.maxDefencePoints;
                 }   
             }
             
@@ -49,26 +48,26 @@ namespace TragicTheReckoning.Controllers.Phases
                     break;
                 }
 
-                if (player1Card.currentDefencePoints > 0 & player2Card.currentDefencePoints > 0)
+                if (player1Card.DefencePoints > 0 & player2Card.DefencePoints > 0)
                 {
                     int p1AttackPoints = player1Card.currentAttackPoints;
-                    player1Card.currentAttackPoints -= player2Card.currentDefencePoints;
-                    player2Card.currentDefencePoints -= p1AttackPoints;
+                    player1Card.currentAttackPoints -= player2Card.DefencePoints;
+                    player2Card.DefencePoints -= p1AttackPoints;
                     
                     int p2AttackPoints = player2Card.currentAttackPoints;
-                    player2Card.currentAttackPoints -= player1Card.currentDefencePoints;
-                    player1Card.currentDefencePoints -= p2AttackPoints;
+                    player2Card.currentAttackPoints -= player1Card.DefencePoints;
+                    player1Card.DefencePoints -= p2AttackPoints;
                 }
 
-                while(player1Card.currentAttackPoints > 0 & player1Card.currentDefencePoints > 0)
+                while(player1Card.currentAttackPoints > 0 & player1Card.DefencePoints > 0)
                 {
                     int currentAttackPoints = player1Card.currentAttackPoints;
                     int index = 1;
 
                     try
                     {
-                        player1Card.currentAttackPoints -= _player2.CardsInArena[index].currentDefencePoints;
-                        _player2.CardsInArena[index].currentDefencePoints -= currentAttackPoints;
+                        player1Card.currentAttackPoints -= _player2.CardsInArena[index].DefencePoints;
+                        _player2.CardsInArena[index].DefencePoints -= currentAttackPoints;
                     }
                     catch
                     {
@@ -78,15 +77,15 @@ namespace TragicTheReckoning.Controllers.Phases
                     index++;
                 }
                 
-                while(player2Card.currentAttackPoints > 0 & player2Card.currentDefencePoints > 0)
+                while(player2Card.currentAttackPoints > 0 & player2Card.DefencePoints > 0)
                 {
                     int currentAttackPoints = player2Card.currentAttackPoints;
                     int index = 1;
 
                     try
                     {
-                        player2Card.currentAttackPoints -= _player1.CardsInArena[index].currentDefencePoints;
-                        _player1.CardsInArena[index].currentDefencePoints -= currentAttackPoints;
+                        player2Card.currentAttackPoints -= _player1.CardsInArena[index].DefencePoints;
+                        _player1.CardsInArena[index].DefencePoints -= currentAttackPoints;
                     }
                     catch
                     {
@@ -103,13 +102,13 @@ namespace TragicTheReckoning.Controllers.Phases
                         throw new Exception();
                     }
 
-                    player.CardsInArena.RemoveAll(card => card.currentDefencePoints <= 0);
+                    player.CardsInArena.RemoveAll(card => card.DefencePoints <= 0);
                 }
             }
 
             if(_player1.CardsInArena.Count > 0 ^ _player2.CardsInArena.Count > 0)
             {
-                if (_player1.CardsInArena.Count >= 0)
+                if (_player1.CardsInArena.Count > 0)
                 {
                     foreach (Card card in _player1.CardsInArena)
                     {
