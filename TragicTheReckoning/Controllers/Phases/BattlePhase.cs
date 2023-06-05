@@ -63,9 +63,16 @@ namespace TragicTheReckoning.Controllers.Phases
                 {
                     int currentAttackPoints = player1Card.currentAttackPoints;
                     int index = 1;
-                    
-                    player1Card.currentAttackPoints -= _player2.CardsInArena[index].currentDefencePoints;
-                    _player2.CardsInArena[index].currentDefencePoints -= currentAttackPoints;
+
+                    try
+                    {
+                        player1Card.currentAttackPoints -= _player2.CardsInArena[index].currentDefencePoints;
+                        _player2.CardsInArena[index].currentDefencePoints -= currentAttackPoints;
+                    }
+                    catch
+                    {
+                        break;
+                    }
 
                     index++;
                 }
@@ -74,9 +81,16 @@ namespace TragicTheReckoning.Controllers.Phases
                 {
                     int currentAttackPoints = player2Card.currentAttackPoints;
                     int index = 1;
-                    
-                    player2Card.currentAttackPoints -= _player1.CardsInArena[index].currentDefencePoints;
-                    _player1.CardsInArena[index].currentDefencePoints -= currentAttackPoints;
+
+                    try
+                    {
+                        player2Card.currentAttackPoints -= _player1.CardsInArena[index].currentDefencePoints;
+                        _player1.CardsInArena[index].currentDefencePoints -= currentAttackPoints;
+                    }
+                    catch
+                    {
+                        break;
+                    }
 
                     index++;
                 }
