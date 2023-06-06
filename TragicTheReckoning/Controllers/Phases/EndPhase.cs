@@ -16,6 +16,7 @@ namespace TragicTheReckoning.Controllers.Phases
 
         public void RunPhase(Player winner)
         {
+            _endView.GameHasEnded();
             _endView.DisplayWinner(winner);
         }
     }

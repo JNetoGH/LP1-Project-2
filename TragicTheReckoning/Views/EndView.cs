@@ -6,6 +6,11 @@ namespace TragicTheReckoning.Views
 {
     public class EndView : View
     {
+        public void GameHasEnded()
+        {
+            Console.WriteLine("This game has come to an end!");
+        }
+        
         public void DisplayWinner(Player winner)
         {
             if (winner != null)
