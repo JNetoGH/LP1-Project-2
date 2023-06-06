@@ -32,6 +32,18 @@ Repositório Git disponível [aqui](https://github.com/JNetoGH/LP1-Project-2).
 
 ## Arquitetura de Solução
 
+O nosso programa começa por criar uma instância de GameLoop e em seguida pede
+aos jogadores por nomes customizados de cada jogador que usa para criar dois
+objetos de Player.
+
+Em seguida, inicializa o método Run do GameLoop que initializa o jogo como os
+players a valores default e uma variável counter a 1 (esta variável informa o
+número do turno atual). Após isto, começa o loop que interrompe imediatamente
+quando for detetada uma Exception (que iremos utilizar para quebrar intencionalmente).
+
+O loop começa pelo RunPhase (método contido por todas as phases visto vir da
+Interface IPhase) da BuyingPhase.
+
 
 ## Diagrama UML
 
