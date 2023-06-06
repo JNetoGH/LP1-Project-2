@@ -112,5 +112,16 @@ namespace TragicTheReckoning.Views
             Console.WriteLine("Following the all-out attack, " + player.Name +
                               "'s monsters are exhausted and retire from the battlefield.");
         }
+
+        /// <summary>
+        /// Asks the player if they wish to surrender and returns their response as a bool
+        /// </summary>
+        /// <param name="player">A Player</param>
+        /// <returns>Boolean depending on their response</returns>
+        public bool SurrenderRequest(Player player)
+        {
+            //Asks the player if they wish to surrender and returns their response as a bool
+            return GetTreatedBooleanInput("Do you wish to forfeit, " + player.Name + "?");
+        }
     }
 }

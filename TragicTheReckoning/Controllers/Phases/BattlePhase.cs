@@ -37,6 +37,7 @@ namespace TragicTheReckoning.Controllers.Phases
         {
             _battleView.RenderPhaseLabel(roundNumber, this.GetType());
             BattlePhaseLoop(players);
+            ForfeitOption(players);
             _battleView.RenderPhaseExit(this.GetType());
         }
 
@@ -267,6 +268,31 @@ namespace TragicTheReckoning.Controllers.Phases
                 _battleView.RenderPlayerDeath(_player2);
                 //Throw the exception which will terminate the GameLoop
                 throw new Exception();
+            }
+        }
+
+        /// <summary>
+        /// Asks both players if they wish to forfeit. If they do, ends the game and awards the win to the opponent
+        /// </summary>
+        /// <param name="players">Array which contains both players</param>
+        private void ForfeitOption(Player[] players)
+        {
+            //Waits for Player's input before proceeding
+            _battleView.RenderExitWithInput();
+            //Clears the screen
+            _battleView.ClearScreen();
+            
+            //Iterates through each players
+            foreach (Player player in players)
+            {
+                //Asks if they wish to surrender and if they do...
+                if (_battleView.SurrenderRequest(player))
+                {
+                    //...sets their Health Points to 0
+                    player.HealthPoints = 0;
+                    //Breaks the GameLoop
+                    throw new Exception();
+                };
             }
         }
     }
