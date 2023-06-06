@@ -27,7 +27,7 @@ namespace TragicTheReckoning.Controllers.Phases
             _battleView.RenderPhaseExit(this.GetType());
         }
 
-        public void BattlePhaseLoop(Player[] players)
+        private void BattlePhaseLoop(Player[] players)
         {
             ResetAttackValues(players);
 
@@ -58,7 +58,7 @@ namespace TragicTheReckoning.Controllers.Phases
             CheckDeadPlayer(_player1, _player2);
         }
 
-        public void ResetAttackValues(Player[] players)
+        private void ResetAttackValues(Player[] players)
         {
             foreach (Player player in players)
             {
@@ -69,7 +69,7 @@ namespace TragicTheReckoning.Controllers.Phases
             }
         }
 
-        public void CardCombat(Card card1, Card card2)
+        private void CardCombat(Card card1, Card card2)
         {
             int attackPoints = card1.currentAttackPoints;
             card1.currentAttackPoints -= card2.DefencePoints;
@@ -80,7 +80,7 @@ namespace TragicTheReckoning.Controllers.Phases
             card1.DefencePoints -= attackPoints;
         }
 
-        public void ExtraDamage(Card card, Player otherPlayer)
+        private void ExtraDamage(Card card, Player otherPlayer)
         {
             while (card.currentAttackPoints > 0 && card.DefencePoints > 0)
             {
@@ -101,7 +101,7 @@ namespace TragicTheReckoning.Controllers.Phases
             }
         }
 
-        public void RemoveDeadCards(Player[] players)
+        private void RemoveDeadCards(Player[] players)
         {
             foreach (Player player in players)
             {
@@ -109,7 +109,7 @@ namespace TragicTheReckoning.Controllers.Phases
             }
         }
 
-        public void OneSidedResolver(Player player1, Player player2)
+        private void OneSidedResolver(Player player1, Player player2)
         {
             if (!(player1.CardsInArena.Count > 0 ^ player2.CardsInArena.Count > 0)) return;
             if (player1.CardsInArena.Count > 0)
@@ -130,7 +130,7 @@ namespace TragicTheReckoning.Controllers.Phases
             }
         }
 
-        public void CheckDeadPlayer(Player player1, Player player2)
+        private void CheckDeadPlayer(Player player1, Player player2)
         {
             if (_player1.HealthPoints <= 0 || _player2.HealthPoints <= 0)
             {
