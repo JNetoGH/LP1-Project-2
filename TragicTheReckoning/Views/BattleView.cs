@@ -3,6 +3,9 @@ using TragicTheReckoning.Models;
 
 namespace TragicTheReckoning.Views
 {
+    /// <summary>
+    /// Has the methods which inform the Players of what is occurring in the Battle Phase
+    /// </summary>
     public class BattleView: View
     {
         /// <summary>
