@@ -17,13 +17,13 @@ namespace TragicTheReckoning.Controllers
 
         private bool _running = true;
 
-        public GameLoop(Player player1, Player player2)
+        public GameLoop()
         {
-            _player1 = player1;
-            _player2 = player2;
+            _player1 = new Player("Player 1");
+            _player2 = new Player("Player 2");
             _buyingPhase = new BuyingPhase();
             _spellPhase = new SpellPhase();
-            _battlePhase = new BattlePhase(player1, player2);
+            _battlePhase = new BattlePhase(_player1, _player2);
             _endPhase = new EndPhase();
         }
 
