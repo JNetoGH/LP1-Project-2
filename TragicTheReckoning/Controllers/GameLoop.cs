@@ -18,8 +18,8 @@ namespace TragicTheReckoning.Controllers
 
         public GameLoop()
         {
-            _player1 = new Player("Player 1");
-            _player2 = new Player("Player 2");
+            _player1 = new Player("The Mage");
+            _player2 = new Player("The Wizard");
             _buyingPhase = new BuyingPhase();
             _spellPhase = new SpellPhase();
             _battlePhase = new BattlePhase(_player1, _player2);
