@@ -5,11 +5,6 @@ namespace TragicTheReckoning.Views
 {
     public class BattleView: View
     {
-        public void RenderBattleView(Player[] players)
-        {
-            Console.WriteLine("Running Battle view (not implemented yet)");
-        }
-
         public void RenderPlayerDeath(Player player)
         {
             Console.WriteLine(player.Name + " has died!");
@@ -50,6 +45,8 @@ namespace TragicTheReckoning.Views
         public void OnlyOnePlayerHasCards(Player player)
         {
             Console.WriteLine("As only " + player.Name + " has monsters remaining, they launch an all-out attack!");
+            RenderExitWithInput();
+            ClearScreen();
         }
 
         public void DirectDamageDealt(Player player, Card card, Player otherPlayer)

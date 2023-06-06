@@ -22,8 +22,6 @@ namespace TragicTheReckoning.Controllers.Phases
         {
             _battleView.RenderPhaseLabel(roundNumber, this.GetType());
             BattlePhaseLoop(players);
-            _battleView.RenderBattleView(players);
-
             _battleView.RenderPhaseExit(this.GetType());
         }
 
