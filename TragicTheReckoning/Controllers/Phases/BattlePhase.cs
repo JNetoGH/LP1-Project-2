@@ -51,11 +51,11 @@ namespace TragicTheReckoning.Controllers.Phases
 
                 ExtraDamage(_player1, player1Card, _player2);
                 ExtraDamage(_player2, player2Card, _player1);
-            }
-            
-            foreach (Player player in players)
-            {
-                RemoveDeadCards(players);
+                
+                foreach (Player player in players)
+                {
+                    RemoveDeadCards(players);
+                }
             }
 
             OneSidedResolver(_player1, _player2);
@@ -77,25 +77,23 @@ namespace TragicTheReckoning.Controllers.Phases
         private void CardCombat(Card card1, Card card2)
         {
             int attackPoints = card1.currentAttackPoints;
-            
             _battleView.RenderDamageDealt(_player1, card1, _player2, card2);
-            
             card1.currentAttackPoints -= card2.DefencePoints;
             card2.DefencePoints -= attackPoints;
 
             attackPoints = card2.currentAttackPoints;
+            _battleView.RenderDamageDealt(_player2, card2, _player1, card1);
             card2.currentAttackPoints -= card1.DefencePoints;
             card1.DefencePoints -= attackPoints;
-            
-            _battleView.RenderDamageDealt(_player2, card2, _player1, card1);
         }
 
         private void ExtraDamage(Player player, Card card, Player otherPlayer)
         {
+            int index = 1;
+            
             while (card.currentAttackPoints > 0 && card.DefencePoints > 0)
             {
                 int currentAttackPoints = card.currentAttackPoints;
-                int index = 1;
 
                 try
                 {

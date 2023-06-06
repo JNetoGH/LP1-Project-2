@@ -35,7 +35,7 @@ namespace TragicTheReckoning.Views
         public void NoDamageDealt(Player player1, Card card1, Player player2, Card card2)
         {
             Console.WriteLine(player1.Name + "'s " + card1.Name + " battles " + player2.Name 
-                              + "'s " + card2.Name + "and neither manages to kill the other.");
+                              + "'s " + card2.Name + " and neither manages to kill the other.");
         }
 
         public void RenderDamageDealt(Player player1, Card card1, Player player2, Card card2)
@@ -44,7 +44,7 @@ namespace TragicTheReckoning.Views
                 : card1.currentAttackPoints;
             
             Console.WriteLine(player1.Name + "'s " + card1.Name + " deals " +
-                              damage + " to " + player2.Name + "'s " + card2.Name);
+                              damage + " damage to " + player2.Name + "'s " + card2.Name);
         }
 
         public void OnlyOnePlayerHasCards(Player player)
