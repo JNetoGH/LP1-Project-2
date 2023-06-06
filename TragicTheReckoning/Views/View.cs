@@ -2,7 +2,7 @@
 
 namespace TragicTheReckoning.Views
 {
-    public class View
+    public abstract class View
     {
 
         public void RenderPhaseLabel(int round, Type phase, ConsoleColor nameColor = ConsoleColor.Cyan)
