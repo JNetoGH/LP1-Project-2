@@ -43,17 +43,21 @@ namespace TragicTheReckoning.Models
         
         public bool BuyNewCard()
         {
-            if (!HasCardsInDeck)
-                return false;
-            Card c = Deck.cardPool[0];
-            Hand.Add(c);
-            Deck.cardPool.Remove(c);
-
+            ///////////////////////////////////////////////////////////////
+            //NETO, VÊ COMO PREFERES IMPLEMENTAR ESTA PARTE
             if(!HasCardsInDeck)
             {
                 Console.WriteLine("The deck has run out of cards!");
                 throw new Exception();
             }
+            /////////////////////////////////////////////////////////////
+            
+            if (!HasCardsInDeck)
+                return false;
+            Card c = Deck.cardPool[0];
+            Hand.Add(c);
+            Deck.cardPool.Remove(c);
+            
             return true;
         }
 
