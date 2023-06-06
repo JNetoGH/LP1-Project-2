@@ -37,5 +37,31 @@ namespace TragicTheReckoning.Views
             Console.WriteLine(player1.Name + "'s " + card1.Name + " battles " + player2.Name 
                               + "'s " + card2.Name + "and neither manages to kill the other.");
         }
+
+        public void RenderDamageDealt(Player player1, Card card1, Player player2, Card card2)
+        {
+            int damage = card1.currentAttackPoints >= card2.DefencePoints ? card2.DefencePoints 
+                : card1.currentAttackPoints;
+            
+            Console.WriteLine(player1.Name + "'s " + card1.Name + " deals " +
+                              damage + " to " + player2.Name + "'s " + card2.Name);
+        }
+
+        public void OnlyOnePlayerHasCards(Player player)
+        {
+            Console.WriteLine("As only " + player.Name + " has monsters remaining, they launch an all-out attack!");
+        }
+
+        public void DirectDamageDealt(Player player, Card card, Player otherPlayer)
+        {
+            Console.WriteLine(player.Name + "'s " + card.Name + " attacks " + otherPlayer.Name +
+                              " directly, dealing " + card.currentAttackPoints + " damage!");
+        }
+
+        public void ExhaustedCards(Player player)
+        {
+            Console.WriteLine("Following the all-out attack, " + player.Name +
+                              "'s monsters are exhausted and retire from the battlefield.");
+        }
     }
 }

@@ -49,8 +49,8 @@ namespace TragicTheReckoning.Controllers.Phases
                     CardCombat(player1Card, player2Card);
                 }
 
-                ExtraDamage(player1Card, _player2);
-                ExtraDamage(player2Card, _player1);
+                ExtraDamage(_player1, player1Card, _player2);
+                ExtraDamage(_player2, player2Card, _player1);
             }
             
             foreach (Player player in players)
@@ -77,15 +77,20 @@ namespace TragicTheReckoning.Controllers.Phases
         private void CardCombat(Card card1, Card card2)
         {
             int attackPoints = card1.currentAttackPoints;
+            
+            _battleView.RenderDamageDealt(_player1, card1, _player2, card2);
+            
             card1.currentAttackPoints -= card2.DefencePoints;
             card2.DefencePoints -= attackPoints;
 
             attackPoints = card2.currentAttackPoints;
             card2.currentAttackPoints -= card1.DefencePoints;
             card1.DefencePoints -= attackPoints;
+            
+            _battleView.RenderDamageDealt(_player2, card2, _player1, card1);
         }
 
-        private void ExtraDamage(Card card, Player otherPlayer)
+        private void ExtraDamage(Player player, Card card, Player otherPlayer)
         {
             while (card.currentAttackPoints > 0 && card.DefencePoints > 0)
             {
@@ -94,6 +99,9 @@ namespace TragicTheReckoning.Controllers.Phases
 
                 try
                 {
+                    _battleView.RenderDamageDealt(player, card, otherPlayer,
+                        otherPlayer.CardsInArena[index]);
+                    
                     card.currentAttackPoints -= otherPlayer.CardsInArena[index].DefencePoints;
                     otherPlayer.CardsInArena[index].DefencePoints -= currentAttackPoints;
                 }
@@ -117,20 +125,29 @@ namespace TragicTheReckoning.Controllers.Phases
         private void OneSidedResolver(Player player1, Player player2)
         {
             if (!(player1.CardsInArena.Count > 0 ^ player2.CardsInArena.Count > 0)) return;
+            
             if (player1.CardsInArena.Count > 0)
             {
+                _battleView.OnlyOnePlayerHasCards(player1);
+                
                 foreach (Card card in player1.CardsInArena)
                 {
+                    _battleView.DirectDamageDealt(player1, card, player2);
                     _player2.HealthPoints -= card.currentAttackPoints;
                 }
+                _battleView.ExhaustedCards(player1);
                 _player1.CardsInArena.Clear();
             }
             else
             {
+                _battleView.OnlyOnePlayerHasCards(player2);
+                
                 foreach (Card card in _player2.CardsInArena)
                 {
+                    _battleView.DirectDamageDealt(player2, card, player1);
                     _player1.HealthPoints -= card.currentAttackPoints;
                 }
+                _battleView.ExhaustedCards(player2);
                 _player2.CardsInArena.Clear();
             }
         }
