@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using TragicTheReckoning.Controllers;
 
 namespace TragicTheReckoning.Models
 {
