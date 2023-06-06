@@ -17,13 +17,7 @@ namespace TragicTheReckoning.Views
             RenderPlayerBuyingPhaseHeader(player);
             Console.WriteLine($"{player.Name} has {Player.MaxCardsInHand} or more cards, you can't buy any cards more");
         }
-        
-        public void RenderEmptyDeckMsg(Player player)
-        {
-            RenderPlayerBuyingPhaseHeader(player);
-            Console.WriteLine($"{player.Name} deck is empty, you can't buy cards anymore");
-        }
-        
+
         public bool RenderBuyingOption(Player player)
         {
             RenderPlayerBuyingPhaseHeader(player);

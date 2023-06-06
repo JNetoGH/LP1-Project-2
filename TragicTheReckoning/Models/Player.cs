@@ -41,24 +41,18 @@ namespace TragicTheReckoning.Models
                 BuyNewCard();
         }
         
-        public bool BuyNewCard()
+        public void BuyNewCard()
         {
-            ///////////////////////////////////////////////////////////////
-            //NETO, VÊ COMO PREFERES IMPLEMENTAR ESTA PARTE
-            if(!HasCardsInDeck)
-            {
-                Console.WriteLine("The deck has run out of cards!");
-                throw new Exception();
-            }
-            /////////////////////////////////////////////////////////////
-            
-            if (!HasCardsInDeck)
-                return false;
             Card c = Deck.cardPool[0];
             Hand.Add(c);
             Deck.cardPool.Remove(c);
             
-            return true;
+            if(!HasCardsInDeck)
+            {
+                Console.WriteLine();
+                Console.WriteLine("The deck has run out of cards!");
+                throw new Exception();
+            }
         }
 
         public bool TrySendCartFromHandToArena(Card card)
@@ -82,6 +76,5 @@ namespace TragicTheReckoning.Models
         }
         
         public override string ToString() => $"{Name} (HP: {HealthPoints}) (MP: {ManaPoints})";
-        
     }
 }

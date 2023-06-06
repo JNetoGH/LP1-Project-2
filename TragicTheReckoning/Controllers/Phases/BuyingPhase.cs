@@ -15,12 +15,6 @@ namespace TragicTheReckoning.Controllers.Phases
             _buyingView.RenderPhaseLabel(roundNumber,this.GetType());
             foreach (Player player in players)
             {
-                if (!player.HasCardsInDeck)
-                {
-                    _buyingView.RenderEmptyDeckMsg(player);
-                    continue;
-                }
-
                 if (!CanBuyACard(player))
                 {
                     _buyingView.RenderNotAllowedToBuyText(player);
