@@ -46,6 +46,7 @@ Interface IPhase) da BuyingPhase.
 
 
 ## Diagrama UML
+![image](https://github.com/JNetoGH/LP1-Project-2/assets/24737993/ae6af116-8e77-4d84-a2a6-e0f4cec4436a)
 
 
 ## Referências
