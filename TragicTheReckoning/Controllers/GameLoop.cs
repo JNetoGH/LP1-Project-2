@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using TragicTheReckoning.Controllers.Phases;
 using TragicTheReckoning.Models;
 
