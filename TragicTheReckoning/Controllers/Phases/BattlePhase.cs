@@ -30,6 +30,8 @@ namespace TragicTheReckoning.Controllers.Phases
         private void BattlePhaseLoop(Player[] players)
         {
             ResetAttackValues(players);
+            
+            _battleView.RenderCardsInField(players);
 
             while (_player1.CardsInArena.Count > 0 && _player2.CardsInArena.Count > 0)
             {
@@ -37,7 +39,10 @@ namespace TragicTheReckoning.Controllers.Phases
                 Card player2Card = _player2.CardsInArena[0];
 
                 if (player1Card.currentAttackPoints <= 0 && player2Card.currentAttackPoints <= 0)
+                {
+                    _battleView.NoDamageDealt(_player1, player1Card, _player2, player2Card);
                     break;
+                }
 
                 if (player1Card.DefencePoints > 0 && player2Card.DefencePoints > 0)
                 {
@@ -132,8 +137,14 @@ namespace TragicTheReckoning.Controllers.Phases
 
         private void CheckDeadPlayer(Player player1, Player player2)
         {
-            if (_player1.HealthPoints <= 0 || _player2.HealthPoints <= 0)
+            if (_player1.HealthPoints <= 0)
             {
+                _battleView.RenderPlayerDeath(_player1);
+                throw new Exception();
+            }
+            else if (_player2.HealthPoints <= 0)
+            {
+                _battleView.RenderPlayerDeath(_player2);
                 throw new Exception();
             }
         }
